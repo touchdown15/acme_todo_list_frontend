@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { 
+  useState,
+  useEffect,
+  useRef
+} from 'react';
 
 import axios from '../../config/axios';
 
@@ -6,6 +10,8 @@ function CreateToDoList(){
   const [nameTask, setNameTask] = useState('');
   const [nameList, setNameList] = useState('');
   const [saveData, setSaveData] = useState();
+
+  const didMount = useRef(true);
 
   const handleSubmit = e =>{
     e.preventDefault();
@@ -26,10 +32,16 @@ function CreateToDoList(){
 
   useEffect(() => {
     
+    if(didMount.current){
+      didMount.current = false;
+      return;
+    }
+
     async function saveList(){
       const request = await axios.post("/api/v1/todolist", saveData);
       console.log(request);
     }
+
     saveList();
 
   },[saveData]);
@@ -41,7 +53,7 @@ function CreateToDoList(){
       </div>
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <p>Nome da Lista</p>
+          <p>Nome da lista</p>
           <input name="nameList" onChange={(e) => setNameList(e.target.value)}/>
         </fieldset>
         <fieldset>
