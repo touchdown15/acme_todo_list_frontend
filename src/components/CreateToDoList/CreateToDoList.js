@@ -6,6 +6,8 @@ import React, {
 
 import axios from '../../config/axios';
 
+import './CreateToDoList.css'
+
 function CreateToDoList(){
   const [nameTask, setNameTask] = useState('');
   const [nameList, setNameList] = useState('');
@@ -47,22 +49,22 @@ function CreateToDoList(){
   },[saveData]);
 
   return(
-    <div>
-      <div>
-        Criar nova lista de tarefas
+    <div className="create-todo-list-container">
+      <div className="text-title">
+        Nova Lista de Tarefas
       </div>
-      <form onSubmit={handleSubmit}>
+      <form className="forms-create-todo-list" onSubmit={handleSubmit}>
         <fieldset>
-          <p>Nome da lista</p>
-          <input name="nameList" onChange={(e) => setNameList(e.target.value)}/>
+          <p className="name-list-title">Nome da lista</p>
+          <input className="input-name-list" name="nameList" onChange={(e) => setNameList(e.target.value)}/>
         </fieldset>
         <fieldset>
           <label>
-            <p>Nome da tarefa</p>
-            <input name="nameTask" onChange={(e) => setNameTask(e.target.value)}/>
+            <p className="name-list-title">Nome da tarefa</p>
+            <input className="input-task-name" name="nameTask" onChange={(e) => setNameTask(e.target.value)}/>
           </label>
         </fieldset>
-        <button type="submit">Submit</button>
+        <button className="btn-submit-todolist" type="submit">Criar Lista</button>
       </form>
     </div>
   );

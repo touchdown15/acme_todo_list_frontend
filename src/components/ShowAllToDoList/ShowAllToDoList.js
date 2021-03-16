@@ -8,6 +8,8 @@ import CreateNewTask from '../CreateNewTask/CreateNewTask';
 import ToggleDoneTask from '../ToggleDoneTask/ToggleDoneTask';
 import DeleteTask from '../DeleteTask/DeleteTask';
 
+import './ShowAllToDoList.css'
+
 function ShowAllToDoList () {
   //Responsavel por capturar todas as listas de tarefas
   const [todolist, setTodolist] = useState([]);
@@ -29,21 +31,24 @@ function ShowAllToDoList () {
     <div>
       {todolist.map(todo=>(
 
-        <div>
-          <div>
+        <div className="show-todo-list-container">
+          
+          <div className="name-todo-list">
             {todo.nameList}
           </div>
 
-          <CreateNewTask todoAddTaskId={todo.id} />
+          <div> 
+            <CreateNewTask todoAddTaskId={todo.id} />
 
-          <div>
             {todo.task.map(task=>(
-              <div>
-                <ToggleDoneTask todoTaskId={task.id} todoTaskName={task.nameTask} />
+              <div className="tasks">
+                <ToggleDoneTask todoTaskId={task.id} todoTaskName={task.nameTask} todoTaskIsDone={task.done} />
                 <DeleteTask deleteTaskId={task.id} />
               </div>
             ))}
+
           </div>
+
         </div>
       ))}
     </div>

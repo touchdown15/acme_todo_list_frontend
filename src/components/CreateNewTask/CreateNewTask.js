@@ -3,7 +3,12 @@ import React, {
   useEffect,
   useRef
 } from 'react';
+import { GrAdd } from 'react-icons/gr';
+import { BiTrash } from 'react-icons/bi';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 import axios from '../../config/axios';
+
+import './CreateNewTask.css'
 
 const CreateNewTask = (props) =>{
 
@@ -16,6 +21,9 @@ const CreateNewTask = (props) =>{
   ]);
   const [saveTaskData, setTaskData] = useState();
   const [addTaskId, setAddTaskId] = useState();
+
+  //Mostra ou esconder os inputs de tarefas
+  const [showInputList, setShowInputList] = useState(false);
 
   //Responsavel por não deixar o axios rodar quando criar o componente
   const didMountAddTask = useRef(true);
@@ -37,7 +45,7 @@ const CreateNewTask = (props) =>{
   },[addTaskId]);
   
   /*
-  Handle dos inputs de adição de uma nova linha ou remoção 
+  Handler dos inputs de adição de uma nova linha ou remoção 
   (Criação de uma nova tarefa) 
   */
   const handleInputCange = (e, index) =>{
@@ -57,7 +65,10 @@ const CreateNewTask = (props) =>{
     setInputList([...inputList, { nameTask: '', isDone: false }]);
   };
 
-  //Handle para colocar organizar a task e salvar
+  //Handler para mostrar ou esconder os inputs
+  const showInput = () => setShowInputList(!showInputList)
+
+  //Handler para colocar organizar a task e salvar
   const handleSubmitTask = (id) =>{
     
     const saveAddTask = {
@@ -72,31 +83,36 @@ const CreateNewTask = (props) =>{
 
   return(
 
-    <div>
+    <div className="add-task-container" >
 
-      {inputList.map((x, i) =>{
-        return(
-          <div>
+      <div>
+        <input type="submit" value="Criar Nova tarefa" onClick={showInput} />
+        { showInputList ? 
+        
+        <div>
+          {inputList.map((x, i) =>{
+            return(
+              <div className="input-task" >
 
-            <input
-              className="campo-tarefa"
-              name="nameTask"
-              placeholder = "Nome da tarefa"
-              value={x.nameTask}
-              onChange={e => handleInputCange(e, i)}
-            />
+                <input
+                  name="nameTask"
+                  placeholder = "Nome da tarefa"
+                  value={x.nameTask}
+                  onChange={e => handleInputCange(e, i)}
+                />
             
-            <div>
-              {inputList.lenght !== 1 && <button className="campo-tarefa" onClick={() => handleRemoveClick(i)}>Remover</button>}
+                {inputList.lenght !== 1 && <a className="btn-remove-row" onClick={() => handleRemoveClick(i)}> <BiTrash size={20} /> </a>}
+                {inputList.length - 1 === i && <a className="btn-add-row" onClick={handleAddClick}> <IoIosAddCircleOutline size={20} /> </a>}
+              </div>
+            );
+          })}
+          
+          <button onClick={() => handleSubmitTask(props.todoAddTaskId)}>Adicionar tarefa</button>
+        </div>
 
-              {inputList.length - 1 === i && <button onClick={handleAddClick}>Adicionar</button>}
-            </div>
+        : null}
+      </div>
 
-          </div>
-        );
-      })}
-      
-      <button onClick={() => handleSubmitTask(props.todoAddTaskId)}>Submit task</button>
 
     </div>
   );

@@ -3,7 +3,10 @@ import React,{
   useEffect,
   useRef
 } from 'react';
+import { BiTrash } from 'react-icons/bi';
 import axios from '../../config/axios';
+
+import './DeleteTask.css';
 
 const DeleteTask = (props) =>{
   //Responsavel por capturar a id das task a ser deletada
@@ -30,7 +33,7 @@ const DeleteTask = (props) =>{
   
   return(
     <div>
-      <button onClick={() => setDeleteId(props.deleteTaskId)}>Deletar</button>
+      <a className="btn-delete-task" onClick={() => setDeleteId(props.deleteTaskId)}> <BiTrash size={25} /> </a>
     </div>
   );
 

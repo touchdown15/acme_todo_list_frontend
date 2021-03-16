@@ -1,0 +1,15 @@
+.task-checkbox-container{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  flex-direction: row;
+}
+
+.checked-task-inactive{
+  text-decoration: line-through;
+}
+
+.checked-task-active{
+  text-decoration: dashed;
+}
+

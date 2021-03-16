@@ -1,0 +1,32 @@
+.create-todo-list-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.create-todo-list-container .text-title{
+  font-size: 30px
+}
+
+.create-todo-list-container .forms-create-todo-list{
+  
+}
+
+.create-todo-list-container .name-list-title{
+  font-size: 25px;
+}
+
+.create-todo-list-container .input-name-list{
+  
+}
+
+.create-todo-list-container .input-task-name{
+  
+}
+
+
+.create-todo-list-container .btn-submit-todolist{
+  
+}

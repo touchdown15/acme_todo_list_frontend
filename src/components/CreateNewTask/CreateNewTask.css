@@ -1,0 +1,19 @@
+.add-task-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.add-task-container .input-task{
+  flex-direction: row;
+}
+
+.btn-remove-row:hover{
+  color: red;
+}
+
+.btn-add-row:hover{
+  color: blue;
+}

@@ -5,12 +5,13 @@ import React,{
 } from 'react';
 import axios from '../../config/axios';
 
+import './ToggleDoneTask.css'
 
 const ToggleDoneTask = (props) =>{
 
   //Responsavel por capturar se a tarefa foi concluida
   const [doneTaskId, setDoneTaskId] = useState();
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(props.todoTaskIsDone);
 
   //Responsavel por não deixar o axios rodar quando criar o componente
   const didMountIsDoneTask = useRef(true);
@@ -29,7 +30,7 @@ const ToggleDoneTask = (props) =>{
     }
     addDoneTaskButton();
 
-  },[doneTaskId]);
+  },[done]);
 
   //Toggle para realizar tarefa
   const toggle = (id) => {
@@ -38,8 +39,18 @@ const ToggleDoneTask = (props) =>{
   }
 
   return(
-    <div>
-      <input type="checkbox" name="done" onChange={() => toggle(props.todoTaskId)} /> {props.todoTaskName}
+    <div className="task-checkbox-container">
+      <input  
+        type="checkbox" 
+        name="done"
+        checked={done} 
+        onChange={() => toggle(props.todoTaskId)} 
+      />
+
+      <div className={`checked${done ? "-task-inactive" : "-task-active"}`}>
+        {props.todoTaskName}
+      </div>
+      
     </div>
   );
 
