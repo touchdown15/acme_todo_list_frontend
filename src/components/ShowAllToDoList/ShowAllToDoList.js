@@ -14,6 +14,9 @@ function ShowAllToDoList () {
   //Responsavel por capturar todas as listas de tarefas
   const [todolist, setTodolist] = useState([]);
 
+  //Mostrar todos os detalhes das listas de tarefas
+  const [showHideCard, setShowHideCard] = useState(false);
+
   //Fetch para captura das listas de tarefas
   useEffect(() => {
     
@@ -26,6 +29,11 @@ function ShowAllToDoList () {
     fetchData();
 
   },[]);
+
+  //Handle para mostrar e esconder todas as descrições das tarefas
+  const handleShowAndHide = () =>{
+    setShowHideCard(!showHideCard);
+  }
   
   return(
     <div>
@@ -33,21 +41,27 @@ function ShowAllToDoList () {
 
         <div className="show-todo-list-container">
           
-          <div className="name-todo-list">
+          <div className="name-todo-list" onClick={handleShowAndHide}>
             {todo.nameList}
           </div>
 
-          <div> 
-            <CreateNewTask todoAddTaskId={todo.id} />
+          { showHideCard ? 
+            
+            <div className="todo-list">
 
-            {todo.task.map(task=>(
-              <div className="tasks">
-                <ToggleDoneTask todoTaskId={task.id} todoTaskName={task.nameTask} todoTaskIsDone={task.done} />
-                <DeleteTask deleteTaskId={task.id} />
-              </div>
-            ))}
+              <CreateNewTask todoAddTaskId={todo.id} />
 
-          </div>
+              {todo.task.map(task=>(
+                <div className="tasks">
+                  <ToggleDoneTask todoTaskId={task.id} todoTaskName={task.nameTask} todoTaskIsDone={task.done} />
+                  <DeleteTask deleteTaskId={task.id} />
+                </div>
+              ))}
+
+            </div>
+
+          : null}
+          
 
         </div>
       ))}

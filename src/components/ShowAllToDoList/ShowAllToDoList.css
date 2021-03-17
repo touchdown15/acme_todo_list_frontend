@@ -4,12 +4,35 @@
   justify-content: center;
   align-items: center;
   text-align: left;
+
+  margin: 10px;
+
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-style: outset;
+  border-radius: 5px;
+
+  background-color: rgba(56, 28, 100, 0.2);
+
+}
+
+.show-todo-list-container:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .show-todo-list-container .name-todo-list{
 
 }
 
+.show-todo-list-container .name-todo-list:hover{
+  color: cyan;
+}
+
 .show-todo-list-container .tasks{
+  display: flex;
   flex-direction: row;
+}
+
+.show-todo-list-container .todo-list{
+  
 }
